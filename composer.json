@@ -1,0 +1,23 @@
+{
+    "name": "monknl/hooks",
+    "type": "package",
+    "license": "none",
+    "version": "0.3.2",
+    "require": {
+        "php": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "hooks\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "thomasvv.nl",
+            "homepage": "https://github.com/MonkNL/Hooks/",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev"
+    
+}
