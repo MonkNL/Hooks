@@ -10,9 +10,9 @@
         "psr-4": {
             "hooks\\": "src/"
         },
-        "files": {
+        "files": [
             "src/helper_functions.php"
-        }
+        ]
     },
     "authors": [
         {
