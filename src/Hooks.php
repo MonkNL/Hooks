@@ -63,7 +63,7 @@ class Hooks {
      * @param int $priority The priority of the hook.
      * @param array $args Additional arguments for the hook.
      */
-    private function addAction(string $hook, callable $callback, $priority = 10, $args = []): void {
+    private function addAction(string $hook, callable $callback, $priority = 10, int $acceptedArguments = 0): void {
         // Add a new hook
         if (!empty($this->hooks[$hook]) && !$this->allowSameCallback) {
             $key = array_search($callback, array_column($this->hooks[$hook], 'callback'));
@@ -71,7 +71,7 @@ class Hooks {
                 returen;
             }
         }
-        $this->hooks[$hook][] = ['callback' => $callback, 'priority' => $priority, 'args' => $args];
+        $this->hooks[$hook][] = ['callback' => $callback, 'priority' => $priority, 'acceptedArguments' => $acceptedArguments];
     }
 
     /**
