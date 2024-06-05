@@ -9,7 +9,8 @@ class Hooks {
     private static $instance = null;
     private $hooks = []; // Array to store registered hooks
     private $calledHooks = []; // Array to track called hooks
-    private $allowSameCallback = false; // Same callback can be called multiple times within one hook. 
+    private $allowSameCallback = false; // Same callback can be called multiple times within one hook.
+
     private function __construct() {
         // Private constructor to prevent direct instantiation
     }
@@ -89,6 +90,40 @@ class Hooks {
             }
         }
     }
+    private function enqueueScript(
+        string $handle, 
+		string $src = "", 
+		array $deps = [], 
+		string|bool|null $ver = false, 
+		array|bool $args = []
+    ){
+        $this->registerScript($handle,$src,$deps,$ver,$args);
+        
+    }
+    private function registerScript(
+        string $handle, 
+		string $src = "", 
+		array $deps = [], 
+		string|bool|null $ver = false, 
+		array|bool $args = []
+    ){
+    
+    }
+    private function enqueueStyle(
+        string $handle, 
+		string $src = "", 
+		array $deps = [], 
+		string|bool|null $ver = false, 
+		array|bool $args = []
+    ){
+    
+    }
+    private function dequeueScript(){
+
+    }
+    private function dequeueStyle(){
+
+    }
     /**
      * Execute hooks for a specific action.
      *
@@ -115,13 +150,7 @@ class Hooks {
         int $priority = 10,
         int $acceptedArguments = 0
     ) {
-        $arguments = [
-            'hook' => $hook,
-            'callback' => $callback,
-            'priority' => $priority,
-            'acceptedArguments' => $acceptedArguments,
-        ];
-        return call_user_func_array([self::getInstance(), 'addAction'], $arguments);
+        return call_user_func_array([self::getInstance(), 'addAction'], func_get_args());
     }
 
     /**
@@ -135,11 +164,70 @@ class Hooks {
         string $hook,
         callable $callback
     ) {
-        $arguments = [
-            'hook' => $hook,
-            'callback' => $callback,
-        ];
-        return call_user_func_array([self::getInstance(), 'removeAction'], $arguments);
+        return call_user_func_array([self::getInstance(), 'removeAction'], func_get_args());
+    }
+    /** 
+    * Enqueue a script
+    *
+    * @param string $handle Name of the script. Should be unique.
+    * @param string $src Full URL of the script, or path of the script relative to the root directory.
+    * @param array $deps An array of registered script handles this script depends on. 
+    * @param string|bool|null $ver String specifying script version number, if it has one, which is added to the URL as a query string for cache busting purposes.
+    * @param array|bool $args An array of additional script loading strategies.
+    * @return void
+    */
+    static function enqueue_script(
+        string $handle, 
+		string $src = "", 
+		array $deps = [], 
+		string|bool|null $ver = false, 
+		array|bool $args = []
+    ){
+        return call_user_func_array([self::getInstance(), 'enqueueScript'], func_get_args());
+    }
+    /** 
+    * Register a script
+    *
+    * @param string $handle Name of the script. Should be unique.
+    * @param string $src Full URL of the script, or path of the script relative to the root directory.
+    * @param array $deps An array of registered script handles this script depends on. 
+    * @param string|bool|null $ver String specifying script version number, if it has one, which is added to the URL as a query string for cache busting purposes.
+    * @param array|bool $args An array of additional script loading strategies.
+    * @return void
+    */
+    static function register_script(
+        string $handle, 
+		string $src = "", 
+		array $deps = [], 
+		string|bool|null $ver = false, 
+		array|bool $args = []
+    ){ 
+        return call_user_func_array([self::getInstance(), 'registerScript'], func_get_args());
+    }
+    /** 
+    * Enqueue a style
+    *
+    * @param string $handle Name of the style. Should be unique.
+    * @param string $src Full URL of the script, or path of the script relative to the root directory.
+    * @param array $deps An array of registered script handles this script depends on. 
+    * @param string|bool|null $ver String specifying script version number, if it has one, which is added to the URL as a query string for cache busting purposes.
+    * @param array|bool $args An array of additional script loading strategies.
+    * @return void
+    */
+    static function enqueue_style(
+        string $handle, 
+		string $src = "", 
+		array $deps = [], 
+		string|bool|null $ver = false, 
+		array|bool $args = []
+    ){
+        return call_user_func_array([self::getInstance(), 'enqueueStyle'], func_get_args());
+    }
+    static function dequeue_script(){
+        return call_user_func_array([self::getInstance(), 'dequeueScript'], func_get_args());
+    }
+    static function dequeue_style(){
+        return call_user_func_array([self::getInstance(), 'dequeueStyle'], func_get_args());
     }
 }
 
