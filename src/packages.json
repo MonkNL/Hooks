@@ -1,0 +1,88 @@
+[
+	"CesiumJS"=>[
+		"versions"=>["1.78"],
+		"href"=>"<script src='https://ajax.googleapis.com/ajax/libs/cesiumjs/{version}/Build/Cesium/Cesium.js'></script>"
+	],
+	"D3.js"=>[
+		"versions"=>["7.9.0","7.8.5","7.8.4","7.8.3","7.8.2","7.8.1","7.8.0","7.7.0","7.6.1","7.4.2","7.0.0","6.7.0","6.6.2","6.6.1","6.6.0","6.5.0","6.3.1","6.2.0","6.1.1","5.16.0","5.15.1","5.15.0","5.14.2","5.12.0","5.11.0","5.9.7","5.9.2","5.9.0","5.8.0","5.7.0","4.13.0","3.5.17"],
+		"href"=>"<script src='https://ajax.googleapis.com/ajax/libs/d3js/{version}/d3.min.js'></script>"
+	],
+	"Dojo"=>[
+		"versions"=>["1.13.0","1.12.3","1.12.2","1.12.1","1.11.5","1.11.4","1.11.3","1.11.2","1.11.1","1.10.9","1.10.8","1.10.7","1.10.6","1.10.5","1.10.4","1.10.3","1.10.2","1.10.1","1.10.0","1.9.11","1.9.10","1.9.9","1.9.8","1.9.7","1.9.6","1.9.5","1.9.4","1.9.3","1.9.2","1.9.1","1.9.0","1.8.14","1.8.13","1.8.12","1.8.11","1.8.10","1.8.9","1.8.8","1.8.7","1.8.6","1.8.5","1.8.4","1.8.3","1.8.2","1.8.1","1.8.0","1.7.12","1.7.11","1.7.10","1.7.9","1.7.8","1.7.7","1.7.6","1.7.5","1.7.4","1.7.3","1.7.2","1.7.1","1.7.0","1.6.5","1.6.4","1.6.3","1.6.2","1.6.1","1.6.0","1.5.6","1.5.5","1.5.4","1.5.3","1.5.2","1.5.1","1.5.0","1.4.8","1.4.7","1.4.6","1.4.5","1.4.4","1.4.3","1.4.1","1.4.0","1.3.2","1.3.1","1.3.0","1.2.3","1.2.0","1.1.1"],
+		"href"=>"<script src='https://ajax.googleapis.com/ajax/libs/dojo/{version}/dojo/dojo.js'></script>"
+	],
+	"Ext Core"=>[
+		"versions"=>["3.1.0","3.0.0"],
+		"href"=>"<script src='https://ajax.googleapis.com/ajax/libs/ext-core/{version}/ext-core.js'></script>"
+	],
+	"Hammer.JS"=>[
+		"versions"=>["2.0.8"],
+		"href"=>"<script src='https://ajax.googleapis.com/ajax/libs/hammerjs/{version}/hammer.min.js'></script>"
+	],
+	"Indefinite Observable"=>[
+		"versions"=>["2.0.1","1.0.1"],
+		"href"=>"<script type='module'>   import { IndefiniteObservable } from 'https://ajax.googleapis.com/ajax/libs/indefinite-observable/{version}/indefinite-observable.bundle.js'; </script>"
+	],
+	"jQuery"=>[
+		"versions"=>["3.7.1","3.7.0","3.6.4","3.6.3","3.6.2","3.6.1","3.6.0","3.5.1","3.5.0","3.4.1","3.4.0","3.3.1","3.2.1","3.2.0","3.1.1","3.1.0","3.0.0","2.2.4","2.2.3","2.2.2","2.2.1","2.2.0","2.1.4","2.1.3","2.1.1","2.1.0","2.0.3","2.0.2","2.0.1","2.0.0","1.12.4","1.12.3","1.12.2","1.12.1","1.12.0","1.11.3","1.11.2","1.11.1","1.11.0","1.10.2","1.10.1","1.10.0","1.9.1","1.9.0","1.8.3","1.8.2","1.8.1","1.8.0","1.7.2","1.7.1","1.7.0","1.6.4","1.6.3","1.6.2","1.6.1","1.6.0","1.5.2","1.5.1","1.5.0","1.4.4","1.4.3","1.4.2","1.4.1","1.4.0","1.3.2","1.3.1","1.3.0","1.2.6","1.2."],
+		"href"=>"<script src='https://ajax.googleapis.com/ajax/libs/jquery/{version}/jquery.min.js'></script>"
+	],
+	"jQuery Mobile"=>[
+		"versions"=>["1.4.5","1.4.4","1.4.3","1.4.2","1.4.1","1.4.0"],
+		"href"=>"
+		<link rel='stylesheet' href='https://ajax.googleapis.com/ajax/libs/jquerymobile/{version}/jquery.mobile.min.css'>
+		<script src='https://ajax.googleapis.com/ajax/libs/jquerymobile/{version}/jquery.mobile.min.js'></script>"
+	],
+	"jQuery UI"=>[
+		"versions"=>["1.13.3","1.13.2","1.13.1","1.13.0","1.12.1","1.12.0","1.11.4","1.11.3","1.11.2","1.11.1","1.11.0","1.10.4","1.10.3","1.10.2","1.10.1","1.10.0","1.9.2","1.9.1","1.9.0","1.8.24","1.8.23","1.8.22","1.8.21","1.8.20","1.8.19","1.8.18","1.8.17","1.8.16","1.8.15","1.8.14","1.8.13","1.8.12","1.8.11","1.8.10","1.8.9","1.8.8","1.8.7","1.8.6","1.8.5","1.8.4","1.8.2","1.8.1","1.8.0","1.7.3","1.7.2","1.7.1","1.7.0","1.6.0","1.5.3","1.5.2	<link","rel="stylesheet"","href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.3/themes/smoothness/jquery-ui.css">"],
+		"href"=>"<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/{version}/jquery-ui.min.js'></script>"
+	],
+	"List.js	2.3.1"=>[
+		"versions"=>[],
+		"href"=>"<script src='https://ajax.googleapis.com/ajax/libs/listjs/{version}/list.min.js'></script>"
+	],
+	"Material Motion"=>[
+		"versions"=>["0.1.0"],
+		"href"=>"<script type='module'>   import {     Draggable,     Point2DSpring,     Tossable,     combineStyleStreams,     getPointerEventStreamsFromElement,   } from 'https://ajax.googleapis.com/ajax/libs/material-motion/0.1.0/material-motion.bundle.js'; </script>"
+	],
+	"Model-Viewer"=>[
+		"versions"=>["3.0.0","2.1.1","2.1.0","2.0.2","2.0.1","2.0.0","1.12.0","1.11.1","1.10.0","1.9.0","1.8.0","1.7.2","1.7.0","1.6.0","1.5.1","1.3.1","1.2.1","1.1.0","1.0.0"],
+		"href"=>"<script src='https://ajax.googleapis.com/ajax/libs/model-viewer/{version}/model-viewer.min.js'></script>"
+	],
+	"MooTools"=>[
+		"versions"=>["1.6.0","1.5.2","1.5.1","1.5.0","1.4.5","1.4.4","1.4.3","1.4.2","1.4.1","1.4.0","1.3.2","1.3.1","1.3.0","1.2.5","1.2.4","1.2.3","1.2.2","1.2.1","1.1.2","1.1.1"],
+		"href"=>"<script src='https://ajax.googleapis.com/ajax/libs/mootools/{version}/mootools.min.js'></script>"
+	],
+	"Myanmar Tools"=>[
+		"versions"=>["1.2.1"],
+		"href"=>"<script src='https://ajax.googleapis.com/ajax/libs/myanmar-tools/{version}/zawgyi_detector.min.js'></script>"
+	],
+	"Prototype"=>[
+		"versions"=>["1.7.3.0","1.7.2.0","1.7.1.0","1.7.0.0","1.6.1.0","1.6.0.3","1.6.0.2"],
+		"href"=>"<script src='https://ajax.googleapis.com/ajax/libs/prototype/{version}/prototype.js'></script>"
+	],
+	"script.aculo.us"=>[
+		"versions"=>["1.9.0","1.8.3","1.8.2","1.8.1"],
+		"href"=>"<script src='https://ajax.googleapis.com/ajax/libs/scriptaculous/{version}/scriptaculous.js'></script>"
+	],
+	"Shaka Player"=>[
+		"versions"=>["4.9.2","4.8.10","4.7.15","4.6.18","4.5.0","4.4.3","4.3.16","4.2.14"],
+		"href"=>"<!-- for non-UI builds: --> <script src='https://ajax.googleapis.com/ajax/libs/shaka-player/{version}/shaka-player.compiled.js'></script> <!-- or, for UI builds: --> "
+	],
+	"SPF"=>[
+		"versions"=>["2.4.0","2.3.2","2.3.1","2.3.0","2.2.0","2.1.2","2.1.1","2.1.0","2.0.1","2.0.0"],
+		"href"=>"<script src='https://ajax.googleapis.com/ajax/libs/spf/{version}/spf.js'></script>"
+	],
+	"SWFObject"=>[
+		"versions"=>["2.2","2.1"],
+		"href"=>"<script src='https://ajax.googleapis.com/ajax/libs/swfobject/{version}/swfobject.js'></script>"
+	],
+	"three.js"=>[
+		"versions"=>["r84","r83","r82","r81","r80","r79","r78","r77","r76","r75","r74","r73","r72","r71","r70","r69","r68","r67","r49"],
+		"href"=>"<script src='https://ajax.googleapis.com/ajax/libs/threejs/{version}/three.min.js'></script>"
+	],
+	"Web Font Loader"=>[
+		"versions"=>["1.6.26","1.6.16","1.5.18","1.5.10","1.5.6","1.5.3","1.5.2","1.5.0"],
+		"href"=>"<script src='https://ajax.googleapis.com/ajax/libs/webfont/{version}/webfont.js'></script>"
+	]
+]

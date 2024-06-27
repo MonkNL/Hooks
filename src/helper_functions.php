@@ -31,13 +31,18 @@ function enqueue_style(
 		):void{
 	Hooks\Hooks::enqueue_style($handle,$src,$deps,$ver,$args);
 }
-function dequeue_script(){
-	Hooks\Hooks::dequeue_script();
+function dequeue_script(string $handle){
+	Hooks\Hooks::dequeue_script($handle);
 }
-function dequeue_style(){
-	Hooks\Hooks::dequeue_style();
+function dequeue_style(string $handle){
+	Hooks\Hooks::dequeue_style($handle);
 }
-
+function print_styles(){
+	Hooks\Hooks::print_styles();
+}
+function print_scripts(){
+	Hooks\Hooks::print_scripts();
+}
 register_script("CesiumJS","https://ajax.googleapis.com/ajax/libs/cesiumjs/1.78/Build/Cesium/Cesium.js",[],"1.78");
 register_script("D3.js","https://ajax.googleapis.com/ajax/libs/d3js/7.9.0/d3.min.js",[],"7.9.0");
 register_script("Dojo","https://ajax.googleapis.com/ajax/libs/dojo/1.13.0/dojo/dojo.js",[],"1.13.0");

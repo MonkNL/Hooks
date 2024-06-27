@@ -6,10 +6,12 @@ namespace Hooks;
  * Manages hooks and actions within the application.
  */
 class Hooks {
-    private static $instance = null;
-    private $hooks = []; // Array to store registered hooks
-    private $calledHooks = []; // Array to track called hooks
-    private $allowSameCallback = false; // Same callback can be called multiple times within one hook.
+    private static $instance    = null;
+    private $hooks              = []; // Array to store registered hooks
+    private $calledHooks        = []; // Array to track called hooks
+    private $allowSameCallback  = false; // Same callback can be called multiple times within one hook.
+    private $scriptsRegistered  = [],$scriptsEnqueued   = []   ,$scriptsLoaded  = [];
+    private $styleRegistered    = [],$styleEnqueued     = []   ,$styleLoaded    = [];
 
     private function __construct() {
         // Private constructor to prevent direct instantiation
@@ -90,15 +92,21 @@ class Hooks {
             }
         }
     }
+    /*
+
+    Script functions
+
+    */
+
     private function enqueueScript(
         string $handle, 
-		string $src = "", 
-		array $deps = [], 
-		string|bool|null $ver = false, 
-		array|bool $args = []
+		string $src             = "", 
+		array $deps             = [], 
+		string|bool|null $ver   = false, 
+		array|bool $args        = []
     ){
         $this->registerScript($handle,$src,$deps,$ver,$args);
-        
+        $this->scriptsEnqueued[]    = $handle;
     }
     private function registerScript(
         string $handle, 
@@ -107,22 +115,101 @@ class Hooks {
 		string|bool|null $ver = false, 
 		array|bool $args = []
     ){
-    
+        if(array_key_exists($handle,$this->scriptsRegistered)){
+            return;
+        }
+        $this->scriptsRegistered[$handle] = [
+            'handle'=>$handle,
+            'src'   =>$src, 
+            'deps'  =>$deps, 
+            'ver'   =>$ver, 
+            'args'  =>$args
+        ];
     }
+
+    private function dequeueScript(string $handle){
+        $key = array_search($handle, $this->scriptsEnqueued);
+        if($key !== false){
+           unset($this->scriptsEnqueued[$key]);
+        }
+    }
+    private function printScripts(?string $handle = null){
+        if(is_null($handle)){
+            foreach($this->scriptsEnqueued as $scriptHandle) {
+                $this->printScripts($scriptHandle);
+            }
+            return;
+        }
+        $script = $this->scriptsRegistered[$handle];
+        foreach ($script['deps'] as $dep) {
+            $this->printScripts($dep);
+        }
+        if(in_array($handle,$this->scriptsLoaded)){
+            return;
+        }
+        echo "<script src=\"{$script['src']}?ver={$script['ver']}\"></script>";
+        $this->scriptsLoaded[] = $handle;
+    }
+    /*
+
+    Style functions
+
+    */
+
     private function enqueueStyle(
+        string $handle, 
+		string $src             = "", 
+		array $deps             = [], 
+		string|bool|null $ver   = false, 
+		array|bool $args        = []
+    ){
+        $this->registerStyle($handle,$src,$deps,$ver,$args);
+        $this->stylesEnqueued[]    = $handle;
+    }
+    private function registerStyle(
         string $handle, 
 		string $src = "", 
 		array $deps = [], 
 		string|bool|null $ver = false, 
 		array|bool $args = []
     ){
-    
+        if(array_key_exists($handle,$this->stylesRegistered)){
+            return;
+        }
+        $this->stylesRegistered[$handle] = [
+            'handle'=>$handle,
+            'src'   =>$src, 
+            'deps'  =>$deps, 
+            'ver'   =>$ver, 
+            'args'  =>$args
+        ];
     }
-    private function dequeueScript(){
 
+    private function dequeueStyle(string $handle){
+        $key = array_search($handle, $this->stylesEnqueued);
+        if($key !== false){
+           unset($this->stylesEnqueued[$key]);
+        }
     }
-    private function dequeueStyle(){
-
+    private function printStyles($handle = null){ 
+        if(is_null($handle)){
+            foreach($this->stylesEnqueued as $styleHandle){
+                $this->printStyles($styleHandle);
+            }
+            return;
+        }
+        if(!array_key_exists($handle,$this->stylesRegistered)){{
+            return;
+        }
+        if(in_array($handle,$this->stylesLoaded)){
+            return;
+        }
+        $style = $this->stylesRegistered[$handle];
+        foreach ($style['deps'] as $dep) {
+            $this->printStyles($dep);
+        }
+        echo "<link href=\"{$style['src']}?ver={$style['ver']}\"/>";
+        $this->stylesLoaded[] = $handle;
     }
     /**
      * Execute hooks for a specific action.
@@ -197,12 +284,43 @@ class Hooks {
     */
     static function register_script(
         string $handle, 
-		string $src = "", 
+		string $src, 
 		array $deps = [], 
 		string|bool|null $ver = false, 
 		array|bool $args = []
-    ){ 
+    ){
         return call_user_func_array([self::getInstance(), 'registerScript'], func_get_args());
+    }
+    /** 
+    * Dequeue a style
+    *
+    * @param string $handle Name of the style that should be removed from the queue
+    * @return void
+    */
+    static function dequeue_script(string $handle){
+        return call_user_func_array([self::getInstance(), 'dequeueScript'], func_get_args());
+    }
+    static function print_scripts(){
+        return call_user_func_array([self::getInstance(), 'printStyles'], func_get_args());
+    }
+    /** 
+    * Register a style
+    *
+    * @param string $handle Name of the style. Should be unique.
+    * @param string $src Full URL of the script, or path of the script relative to the root directory.
+    * @param array $deps An array of registered script handles this script depends on. 
+    * @param string|bool|null $ver String specifying script version number, if it has one, which is added to the URL as a query string for cache busting purposes.
+    * @param array|bool $args An array of additional script loading strategies.
+    * @return void
+    */
+    static function register_style(
+        string $handle, 
+		string $src, 
+		array $deps = [], 
+		string|bool|null $ver = false, 
+		array|bool $args = []
+    ){
+        return call_user_func_array([self::getInstance(), 'registerStyle'], func_get_args());
     }
     /** 
     * Enqueue a style
@@ -223,12 +341,14 @@ class Hooks {
     ){
         return call_user_func_array([self::getInstance(), 'enqueueStyle'], func_get_args());
     }
-    static function dequeue_script(){
-        return call_user_func_array([self::getInstance(), 'dequeueScript'], func_get_args());
-    }
-    static function dequeue_style(){
+    static function dequeue_style(string $handle){
         return call_user_func_array([self::getInstance(), 'dequeueStyle'], func_get_args());
     }
+    static function print_styles(){
+        return call_user_func_array([self::getInstance(), 'printStyles'], func_get_args());
+    }
+
+    
 }
 
 
