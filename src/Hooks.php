@@ -198,7 +198,7 @@ class Hooks {
             }
             return;
         }
-        if(!array_key_exists($handle,$this->stylesRegistered)){{
+        if(!array_key_exists($handle,$this->stylesRegistered)){
             return;
         }
         if(in_array($handle,$this->stylesLoaded)){
