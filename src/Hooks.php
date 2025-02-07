@@ -12,7 +12,9 @@ class Hooks {
     private $allowSameCallback  = false; // Same callback can be called multiple times within one hook.
     private $scriptsRegistered  = [],$scriptsEnqueued   = []   ,$scriptsLoaded  = [];
     private $styleRegistered    = [],$styleEnqueued     = []   ,$styleLoaded    = [];
-
+    private $defaultHooks = [
+        'body' => ['header', 'content', 'footer']
+    ];
     private function __construct() {
         // Private constructor to prevent direct instantiation
     }
@@ -34,6 +36,21 @@ class Hooks {
     public static function uncalledHooks(){
 
     }
+	public function setDefaultHooks(string $hook, array $actions): void {
+	    $this->defaultHooks[$hook] = $actions;
+	}
+	
+	public function removeDefaultHook(string $hook, string $action): void {
+	    if (!empty($this->defaultHooks[$hook])) {
+	        $this->defaultHooks[$hook] = array_filter(
+	            $this->defaultHooks[$hook],
+	            fn($existingAction) => $existingAction !== $action
+	        );
+	        
+	        // Herindexeer array om lege sleutels te vermijden
+	        $this->defaultHooks[$hook] = array_values($this->defaultHooks[$hook]);
+	    }
+	}
     /**
      * Execute hooks for a specific action.
      *
@@ -41,6 +58,12 @@ class Hooks {
      * @param mixed ...$args Additional arguments to pass to the hooks.
      */
     private function doHook($hook, ...$args): void {
+	// Controleer of er standaardacties zijn voor deze hook
+	if (!empty($this->defaultHooks[$hook])) {
+	    foreach ($this->defaultHooks[$hook] as $defaultHook) {
+	         $this->doHook($defaultHook, ...$args);
+	    }
+	}
         // Execute hooks and keep track of called hooks
         if (empty($this->calledHooks[$hook])) {
             $this->calledHooks[$hook] = ['times' => 0, 'arguments' => $args];
@@ -76,7 +99,7 @@ class Hooks {
         }
         $this->hooks[$hook][] = ['callback' => $callback, 'priority' => $priority, 'acceptedArguments' => $acceptedArguments];
     }
-
+	
     /**
      * Remove an action hook.
      *
